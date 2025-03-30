@@ -2,6 +2,13 @@
 
 This repository contains the source code for the Natalie G Winters website, deployed on Cloudflare Pages and powered by a Cloudflare Worker API connected to a Cloudflare D1 database.
 
+## Current Status (As of YYYY-MM-DD HH:MM)
+
+*   **CJ Product Feed:** The *first real* product feed (`AllAdvertisersDailyHTTP-shopping-*.zip`) is reported to be available on the CJ SFTP server (`datatransfer.cj.com:/outgoing/productcatalog`).
+*   **`scripts/transform-cj-products.js`:** This script has been **reverted** from using the local sample feed (`cj-sample-feed.txt`) and is now configured to connect via SFTP, download the latest ZIP, extract the feed, parse it, and output `d1-import-products.json` to the project root.
+*   **`scripts/import-to-d1.js`:** This script remains **temporarily modified** to ONLY process the `products` table. It will drop and recreate the `products` table using `sql_scripts/create-products.sql` and then attempt to import data from `d1-import-products.json`. The logic for importing articles and businesses is still commented out.
+*   **Next Steps:** The next intended action is to run `node scripts/transform-cj-products.js` locally to process the live feed, followed by `node scripts/import-to-d1.js` to update the remote D1 database's `products` table.
+
 ## Project Structure
 
 ```

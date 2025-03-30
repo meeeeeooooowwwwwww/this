@@ -3,7 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json # Optional, depends on team workflow (keep if solo)
+# package-lock.json # Commit this for consistent installs
 
 # Wrangler / Cloudflare
 .wrangler/
@@ -16,6 +16,11 @@ package-lock.json # Optional, depends on team workflow (keep if solo)
 cj-feed-download.zip
 cj-feed-extracted/
 
+# Large Generated Files
+d1-import-products.json
+sql-imports/
+temp_output/
+
 # OS generated files
 .DS_Store
 Thumbs.db
@@ -25,7 +30,7 @@ Thumbs.db
 import_log.txt # From PROJECT_STATUS_AND_PLAN.md
 
 # Temporary SQL files from import script
-insert-*-batch-*.sql
+# insert-*-batch-*.sql # Covered by sql-imports/
 
 # IDE specific
 .vscode/
@@ -40,4 +45,4 @@ deleted/
 project_backup/
 
 # Documentation
-README.md 
+# README.md # Commit this
