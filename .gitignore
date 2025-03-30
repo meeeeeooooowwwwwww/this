@@ -37,4 +37,7 @@ build/
 
 # Custom Project Folders
 deleted/
-project_backup/ 
+project_backup/
+
+# Documentation
+README.md 
