@@ -146,6 +146,21 @@ async function fetchInitialContent() {
     }
 }
 
+// Utility function to escape HTML special characters
+function escapeHTML(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[&<>'"/]/g, function (s) {
+        const entityMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;', // or &apos;
+            '/': '&#x2F;' // Forward slash to prevent breaking script tags
+        };
+        return entityMap[s];
+    });
+}
 
 // Handle search execution
 async function handleSearch(isNewSearch = false) {
@@ -238,6 +253,10 @@ function displayResults(results) {
     const description = result.description || '';
     const link = result.link || result.url || '#'; // Use link or url
     
+    // Escape potentially unsafe fields before inserting into HTML
+    const escapedTitle = escapeHTML(title);
+    const escapedDescription = escapeHTML(description);
+
     // Determine thumbnail, applying specific placeholder for articles if needed
     let finalThumbnail = result.thumbnail || result.image_url || 'https://via.placeholder.com/320x180.png?text=No+Image'; // Default
     if (result.type === 'article' && finalThumbnail === 'https://via.placeholder.com/320x180.png?text=No+Image') {
@@ -252,8 +271,8 @@ function displayResults(results) {
         <a href="${link}" target="_blank" rel="noopener noreferrer">
             <img src="${finalThumbnail}" alt="" loading="lazy">
             <div class="result-card-content">
-                <h3>${title}</h3>
-                ${description ? `<p>${description}</p>` : ''}
+                <h3>${escapedTitle}</h3>
+                ${escapedDescription ? `<p>${escapedDescription}</p>` : ''}
                 <div class="result-card-meta">
                    Type: ${result.type || 'Unknown'}
                    ${result.date ? ` | Date: ${new Date(result.date).toLocaleDateString()}` : ''}

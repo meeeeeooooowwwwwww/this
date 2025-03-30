@@ -87,14 +87,21 @@ async function handleOptions(request) {
 // Search function that looks through D1 database
 async function searchData(env, query, options = {}) {
   try {
-    const { type, page = 1, limit = PAGINATION.defaultLimit } = options;
+    const { type } = options;
+    // Validate and sanitize inputs
+    let page = parseInt(options.page, 10) || 1;
+    let limit = parseInt(options.limit, 10) || PAGINATION.defaultLimit;
+    page = Math.max(1, page); // Ensure page is at least 1
+    limit = Math.min(PAGINATION.maxLimit, Math.max(1, limit)); // Ensure limit is between 1 and maxLimit
+    const cleanQuery = (query || '').trim(); // Trim whitespace
+
     const offset = (page - 1) * limit;
     
     let results = [];
     let total = 0;
     
     // Prepare the search query with wildcards for partial matching
-    const searchTerm = `%${query.toLowerCase()}%`;
+    const searchTerm = `%${cleanQuery.toLowerCase()}%`; // Use cleanQuery
     
     if (!type || type === 'video') {
       // For videos, use a simpler query
@@ -250,7 +257,7 @@ async function searchData(env, query, options = {}) {
 
     // If no type filter is applied, sort combined results by relevance
     if (!type && results.length > 0) {
-      results = processSearchResults(results, query);
+      results = processSearchResults(results, cleanQuery); // Use cleanQuery
     }
 
     return {
@@ -270,9 +277,20 @@ async function searchData(env, query, options = {}) {
 }
 
 // Get data by type from D1 database with pagination
-async function getData(env, type, options = {}) {
+async function getData(env, options = {}) {
   try {
-    const { page = 1, limit = PAGINATION.defaultLimit } = options;
+    const { type, page: pageOpt = 1, limit: limitOpt = PAGINATION.defaultLimit } = options;
+
+    // Validate type
+    if (!type || !['videos', 'articles'].includes(type)) {
+        return errorResponse('Invalid data type specified.', 400);
+    }
+
+    // Validate and sanitize pagination
+    let page = parseInt(pageOpt, 10) || 1;
+    let limit = parseInt(limitOpt, 10) || PAGINATION.defaultLimit;
+    page = Math.max(1, page);
+    limit = Math.min(PAGINATION.maxLimit, Math.max(1, limit));
     const offset = (page - 1) * limit;
     
     let sqlQuery = '';
@@ -426,7 +444,7 @@ export default {
         }
         
         try {
-          const data = await getData(env, type, { page, limit });
+          const data = await getData(env, { page, limit });
           console.log(`Data results count: ${data.results.length}`);
           return jsonResponse(data);
         } catch (error) {
