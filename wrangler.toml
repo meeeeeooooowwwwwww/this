@@ -1,0 +1,45 @@
+# Top-level configuration applies to the default (development) environment
+name = "business-directory" # Worker name - keep consistent for now
+main = "worker.js"
+compatibility_date = "2023-03-29"
+
+[[kv_namespaces]]
+binding = "DIRECTORY_DATA"
+id = "42c56c003c454a42a03f1b1fdaa8313f"
+
+[[kv_namespaces]]
+binding = "SEARCH_DATA"
+id = "20ff47dc6f3549d189a7691f0e150b94"
+
+[[d1_databases]]
+binding = "NATALIEWINTERS_DB"
+database_name = "nataliewinters-db"
+database_id = "67d2b960-fbe6-4451-b837-f88de68d2036"
+
+[observability]
+[observability.logs]
+enabled = true
+
+# Default environment (development) Pages configuration
+[site]
+bucket = "./public"
+# You might link this environment to a specific Pages project name via wrangler pages deploy
+# Example: npx wrangler pages deploy public --project-name=natalie-winters-dev
+
+# Production Environment Configuration
+[env.production]
+name = "business-directory" # Can be the same or different worker name
+# Routes or Custom Domains for the worker specific to production can be added here if needed
+# but often managed via Cloudflare dashboard.
+
+# Production Pages configuration (link via deploy command)
+[env.production.site]
+bucket = "./public"
+# Deploy using: npx wrangler pages deploy public --project-name=natalie-winters-prod --branch=production # (or main branch)
+
+# Note: D1, KV bindings are inherited from the top-level unless overridden here.
+# Example override:
+# [env.production.d1_databases]
+# binding = "NATALIEWINTERS_DB"
+# database_name = "nataliewinters-db-prod" # If you had a separate prod DB
+# database_id = "YOUR_PROD_DB_ID"

@@ -1,0 +1,24 @@
+{
+  "name": "business-directory",
+  "version": "1.0.0",
+  "description": "Business directory website with search functionality using Cloudflare Workers and KV Storage",
+  "main": "worker.js",
+  "scripts": {
+    "dev": "wrangler dev worker.js",
+    "deploy": "node deploy.js",
+    "seed": "node seed-data.js",
+    "build": "echo 'Static site, no build step required'",
+    "test": "echo 'No tests specified'"
+  },
+  "dependencies": {
+    "wrangler": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+} 

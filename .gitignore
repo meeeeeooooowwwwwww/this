@@ -1,0 +1,40 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json # Optional, depends on team workflow (keep if solo)
+
+# Wrangler / Cloudflare
+.wrangler/
+*.db
+*.sqlite
+*.sqlite-journal
+.dev.vars # VERY IMPORTANT for local secrets
+
+# CJ Feed Files (Temporary)
+cj-feed-download.zip
+cj-feed-extracted/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+import_log.txt # From PROJECT_STATUS_AND_PLAN.md
+
+# Temporary SQL files from import script
+insert-*-batch-*.sql
+
+# IDE specific
+.vscode/
+.idea/
+
+# Build artifacts (if applicable)
+dist/
+build/
+
+# Custom Project Folders
+deleted/
+project_backup/ 

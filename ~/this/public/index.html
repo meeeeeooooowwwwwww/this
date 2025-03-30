@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Directory | Find Local Businesses</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        // Force scroll to top on page load
+        window.onload = function() {
+            window.scrollTo(0, 0);
+            document.body.classList.add('disable-animations');
+            setTimeout(function() {
+                document.body.classList.remove('disable-animations');
+            }, 100);
+        };
+    </script>
+</head>
+<body class="business-layout">
+    <div class="nav-container">
+        <nav class="top-nav">
+            <div class="logo">
+                <a href="/">Business<span>Directory</span></a>
+            </div>
+            <button class="menu-toggle">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="page-wrapper">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Find the Perfect Local Business</h1>
+                <p>Discover top-rated businesses in your area</p>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for businesses...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </section>
+
+        <section id="categories" class="section">
+            <div class="container">
+                <h2 class="section-title">Browse Categories</h2>
+                <div class="categories-grid">
+                    <!-- Categories will be dynamically loaded -->
+                </div>
+            </div>
+        </section>
+
+        <section id="featured" class="section">
+            <div class="container">
+                <h2 class="section-title">Featured Businesses</h2>
+                <div class="featured-grid">
+                    <!-- Featured businesses will be dynamically loaded -->
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>Business<span>Directory</span></h3>
+                        <p>Your guide to local businesses</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#categories">Categories</a></li>
+                            <li><a href="#featured">Featured</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>Email: info@businessdirectory.com</p>
+                        <p>Phone: (123) 456-7890</p>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 BusinessDirectory. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="search.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 

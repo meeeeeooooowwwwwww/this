@@ -1,0 +1,522 @@
+/* styles.css - Clean Base Layout */
+:root {
+  /* Color Palette (Simple & Clean) */
+  --color-text: #333;
+  --color-text-light: #777;
+  --color-background: #fff;
+  --color-background-alt: #f8f8f8;
+  --color-border: #eee;
+  --color-primary: #ffb6c1; /* LightPink */
+  --color-primary-hover: #f08080; /* LightCoral for hover */
+
+  /* Typography */
+  --font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-size-base: 1rem; /* 16px */
+  --line-height-base: 1.6;
+
+  /* Spacing */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem;  /* 8px */
+  --space-md: 1rem;    /* 16px */
+  --space-lg: 1.5rem;  /* 24px */
+  --space-xl: 2rem;    /* 32px */
+
+  /* Layout */
+  --max-width: 1100px;
+  --header-height: 60px;
+}
+
+/* Basic Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+p { margin-bottom: var(--space-md); }
+
+button, .button {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+button:hover, .button:hover {
+  background: var(--color-primary-hover);
+  text-decoration: none;
+  color: white;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+textarea {
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: var(--font-size-base);
+    width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+    border-color: var(--color-primary);
+}
+
+
+/* General Layout Elements */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+.page-wrapper {
+  flex-grow: 1; /* Allows footer to stick to bottom */
+  width: 100%;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.site-logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.main-navigation ul {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.main-navigation a {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: var(--space-sm) 0;
+  border-bottom: 2px solid transparent; /* Placeholder for hover effect */
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+.main-navigation a:hover,
+.main-navigation a.active { /* Style for active link */
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom-color: var(--color-primary);
+}
+
+.menu-toggle {
+    display: none; /* Hidden on larger screens */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Main Content Area */
+main {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-xl);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--color-background-alt);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-lg) 0;
+  margin-top: auto; /* Pushes footer to bottom */
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+.site-footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: var(--space-md);
+}
+
+.footer-nav ul {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.footer-nav a {
+    color: var(--color-text-light);
+}
+.footer-nav a:hover,
+.footer-nav a.active { /* Highlight active in footer too */
+    color: var(--color-primary);
+}
+
+.footer-copyright {
+    /* text-align: right; */ /* Adjusted alignment based on flex wrap */
+    margin-left: auto; /* Push to right when space allows */
+}
+
+/* --- Layout Variations --- */
+
+/* Default/Shared Structure */
+.main-content {
+    /* Basic single column */
+}
+
+/* Hero Section Specific Styles */
+.hero {
+    background-color: var(--color-background-alt); /* Fallback color */
+    background-size: cover; /* Scale image to cover the element */
+    background-position: center top; /* Center horizontally, align to top vertically */
+    padding: var(--space-xl) 0 var(--space-lg) 0; /* Added bottom padding */
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    /* color: #fff; Default text color removed, will be set on container */
+    position: relative; 
+    min-height: 350px; /* Slightly increased height maybe? Adjust as needed */
+    display: flex; 
+    align-items: flex-end; /* Align content container to the bottom */
+    justify-content: center; 
+}
+
+/* Ensure hero content container has background and padding */
+.hero .container { 
+   position: relative; 
+   z-index: 2;
+   background-color: rgba(0, 0, 0, 0.3); /* Lighter semi-transparent dark background */
+   padding: var(--space-sm) var(--space-md); /* Reduced padding */
+   border-radius: 4px;
+   display: inline-block; /* Fit the box to the content */
+   max-width: 90%; /* Ensure it doesn't touch edges on small screens */
+}
+
+.hero h1 {
+   color: #fff; /* White text on dark background */
+   margin-bottom: var(--space-sm);
+}
+
+ .hero p {
+   color: rgba(255, 255, 255, 0.9); 
+   font-size: 1.1rem;
+   /* max-width: 600px; No longer needed as container limits width */
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 0;
+}
+
+/* Home Layout Specifics */
+.layout-home .main-content {
+    /* Custom styles for homepage grid or sections */
+}
+
+/* Articles/Videos/Businesses Layout Specifics (Often similar list/grid views) */
+.layout-articles .main-content,
+.layout-videos .main-content,
+.layout-businesses .main-content {
+    /* Styles for listings */
+}
+
+/* Contact Layout Specifics */
+.layout-contact .main-content {
+    /* Styles for contact form or info */
+    max-width: 700px; /* Often centered and narrower */
+    margin-left: auto;
+    margin-right: auto;
+}
+.layout-contact .form-group {
+    margin-bottom: var(--space-md);
+}
+.layout-contact label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 500;
+}
+
+/* Search Specific Styles (Apply universally or within specific layouts) */
+.search-section {
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-lg);
+    background-color: var(--color-background-alt);
+    /* border-bottom: 1px solid var(--color-border); */ /* Optional border */
+}
+
+.search-section h1 {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto; /* Center the search bar */
+}
+
+.search-bar input[type="search"] {
+    flex-grow: 1;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-bar button {
+    border-radius: 0 4px 4px 0;
+}
+
+.search-results {
+    margin-top: var(--space-lg);
+}
+
+.results-header {
+    margin-bottom: var(--space-md);
+    /* Optional: Add border or different styling */
+}
+
+.results-header .note {
+    font-style: italic;
+    color: var(--color-text-light);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+}
+
+.result-card {
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: var(--color-background);
+    transition: box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column; /* Ensure content stacks vertically */
+}
+
+.result-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.result-card a {
+    text-decoration: none;
+    color: inherit; /* Inherit text color */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Make link fill the card */
+}
+.result-card a:hover {
+    color: inherit;
+}
+
+.result-card img {
+    width: 100%;
+    height: 180px; /* Fixed height for grid alignment */
+    object-fit: cover; /* Cover aspect ratio */
+    background-color: var(--color-background-alt); /* Placeholder bg */
+    border-bottom: 1px solid var(--color-border);
+}
+
+.result-card-content {
+    padding: var(--space-md);
+    flex-grow: 1; /* Allow content to fill space */
+    display: flex;
+    flex-direction: column;
+}
+
+.result-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+}
+.result-card a:hover h3 {
+    color: var(--color-primary);
+}
+
+.result-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 0; /* Remove default bottom margin */
+    flex-grow: 1; /* Push meta info down */
+    /* Limit description lines if needed */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.result-card-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+}
+
+.pagination {
+    margin-top: var(--space-xl);
+    text-align: center;
+}
+
+.pagination button {
+    margin: 0 var(--space-xs);
+}
+.pagination button.active {
+    background-color: var(--color-primary-hover);
+    cursor: default;
+}
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Loading Indicator Style */
+#loadingIndicator {
+    display: none; /* Hidden by default */
+    text-align: center;
+    padding: var(--space-md) 0;
+    color: var(--color-text-light);
+    font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+
+    .main-navigation {
+        display: none; /* Hide menu on small screens */
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background-color: var(--color-background);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--space-md);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .main-navigation.active {
+        display: block; /* Show when active */
+    }
+
+    .main-navigation ul {
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: center;
+    }
+    .main-navigation a {
+        padding: var(--space-sm) var(--space-md);
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-bottom: none; /* Remove bottom border on mobile */
+    }
+    .main-navigation a:hover,
+    .main-navigation a.active {
+        background-color: var(--color-background-alt);
+        color: var(--color-primary);
+        border-radius: 4px;
+        border-bottom: none;
+    }
+
+    .menu-toggle {
+        display: block; /* Show the hamburger button */
+        transform: scale(1); /* Base scale */
+        transition: transform 0.1s ease-out; /* Add smooth transition */
+    }
+
+    .menu-toggle:hover {
+        transform: scale(1.1); /* Slightly larger on hover */
+    }
+
+    .menu-toggle:active {
+        transform: scale(0.95); /* Slightly smaller when clicking */
+    }
+
+    .site-footer .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .footer-copyright {
+        text-align: center;
+        margin-top: var(--space-sm);
+        margin-left: 0; /* Reset margin */
+    }
+}
