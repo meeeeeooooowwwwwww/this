@@ -2,15 +2,21 @@
  * Search functionality for the business directory website (Lazy Loading)
  */
 
-// Configuration
+// Configuration - REMOVED API_CONFIG, using relative paths now.
+/*
 const API_CONFIG = {
   baseUrl: window.location.hostname === 'localhost' 
     ? 'http://localhost:8787' 
-    : 'https://business-directory.generalflynn17.workers.dev',
+    : 'https://business-directory.generalflynn17.workers.dev', // Using relative paths now
   endpoints: {
     search: '/api/search',
     data: '/api/data'
   }
+};
+*/
+const API_ENDPOINTS = {
+    search: '/api/search',
+    data: '/api/data'
 };
 
 // State management
@@ -124,11 +130,10 @@ async function fetchInitialContent() {
         const defaultParams = new URLSearchParams({
             type: 'videos', // Request videos specifically
             page: '1',
-            // limit: currentSearchState.limit // Use a fixed limit for homepage recent content
             limit: '6' // Fetch 6 items
         });
-        // Use /api/data endpoint
-        const response = await fetch(`${API_CONFIG.baseUrl}${API_CONFIG.endpoints.data}?${defaultParams.toString()}`);
+        // Use relative path for /api/data
+        const response = await fetch(`${API_ENDPOINTS.data}?${defaultParams.toString()}`);
         if (!response.ok) throw new Error(`API Error: ${response.status}`);
         const data = await response.json();
 
@@ -184,8 +189,9 @@ async function handleSearch(isNewSearch = false) {
     }
     // No type added for index.html (searches all)
     
-    const searchUrl = `${API_CONFIG.baseUrl}${API_CONFIG.endpoints.search}?${searchParams.toString()}`;
-    console.log(`Fetching: ${searchUrl}`);
+    // Use relative path for /api/search
+    const searchUrl = `${API_ENDPOINTS.search}?${searchParams.toString()}`;
+    console.log(`Fetching: ${searchUrl}`); // Will now show relative path
     const response = await fetch(searchUrl);
     
     if (!response.ok) {

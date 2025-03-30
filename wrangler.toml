@@ -3,13 +3,14 @@ name = "business-directory" # Worker name - keep consistent for now
 main = "worker.js"
 compatibility_date = "2023-03-29"
 
-[[kv_namespaces]]
-binding = "DIRECTORY_DATA"
-id = "42c56c003c454a42a03f1b1fdaa8313f"
-
-[[kv_namespaces]]
-binding = "SEARCH_DATA"
-id = "20ff47dc6f3549d189a7691f0e150b94"
+# Removed unused KV Namespaces
+# [[kv_namespaces]]
+# binding = "DIRECTORY_DATA"
+# id = "42c56c003c454a42a03f1b1fdaa8313f"
+# 
+# [[kv_namespaces]]
+# binding = "SEARCH_DATA"
+# id = "20ff47dc6f3549d189a7691f0e150b94"
 
 [[d1_databases]]
 binding = "NATALIEWINTERS_DB"

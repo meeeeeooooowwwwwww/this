@@ -60,7 +60,7 @@ This deploys the latest code from your **current local branch** (usually `develo
 # npx wrangler deploy
 
 # Deploy Pages to the development project
-npx wrangler pages deploy public --project-name=natalie-winters-dev
+npx wrangler pages deploy public --project-name=natalie-g-winters-dev-this
 ```
 
 ### 2. Production Deployment (to `nataliegwinters.com`)
@@ -89,12 +89,12 @@ git merge develop
 # npx wrangler deploy --env production
 
 # 7. Deploy Pages to the production project, linking the production branch
-npx wrangler pages deploy public --project-name=natalie-winters-prod --branch=production
+npx wrangler pages deploy public --project-name=YOUR_PRODUCTION_PROJECT_NAME --branch=production
 ```
 
 **Notes:**
 *   The `--env production` flag is generally *not required* for `pages deploy` when the `[env.production.site]` section exists in `wrangler.toml`, but explicitly specifying `--project-name` and `--branch` is crucial.
-*   Always ensure the correct Cloudflare Pages project names (`natalie-winters-dev`, `natalie-winters-prod`) are used.
+*   Always ensure the correct Cloudflare Pages project names (`natalie-g-winters-dev-this`, `YOUR_PRODUCTION_PROJECT_NAME`) are used.
 *   Remember to remove the redirect rule from `nataliegwinters.com` in the Cloudflare dashboard.
 
 ## Local Development
