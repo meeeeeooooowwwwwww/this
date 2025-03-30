@@ -173,6 +173,17 @@ async function handleSearch(isNewSearch = false) {
     currentSearchState.page = 1;
     currentSearchState.totalPages = 1; // Reset total pages
     resultsGrid.innerHTML = ''; // Clear previous results for new search
+
+    // Update heading on new search (only if heading exists)
+    const contentHeading = document.getElementById('contentHeading');
+    if (contentHeading && query !== '') { // Only change if it's a real search
+        contentHeading.textContent = `Search Results for "${escapeHTML(query)}"`;
+    } else if (contentHeading && query === '') {
+        // Optionally reset heading if search query is cleared
+        contentHeading.textContent = 'Latest Reports'; 
+        // Consider calling fetchInitialContent() here if you want to reload recent items
+    }
+
   } else if (currentSearchState.isLoading || currentSearchState.page > currentSearchState.totalPages) {
     return; // Don't trigger if already loading or past the last page
   }
