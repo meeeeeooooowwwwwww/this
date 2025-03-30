@@ -444,7 +444,7 @@ export default {
         }
         
         try {
-          const data = await getData(env, { page, limit });
+          const data = await getData(env, { type, page, limit });
           console.log(`Data results count: ${data.results.length}`);
           return jsonResponse(data);
         } catch (error) {
