@@ -2,6 +2,7 @@
 name = "business-directory" # Worker name - keep consistent for now
 main = "worker.js"
 compatibility_date = "2023-03-29"
+workers_dev = true # Ensure workers.dev subdomain is enabled
 
 # Removed unused KV Namespaces
 # [[kv_namespaces]]
@@ -30,8 +31,16 @@ bucket = "./public"
 # Production Environment Configuration
 [env.production]
 name = "business-directory" # Can be the same or different worker name
-# Routes or Custom Domains for the worker specific to production can be added here if needed
-# but often managed via Cloudflare dashboard.
+# Add explicit route for the production custom domain
+routes = [
+    { pattern = "nataliegwinters.com/*", custom_domain = true }
+]
+
+# Add the D1 binding explicitly for production
+[[env.production.d1_databases]]
+binding = "NATALIEWINTERS_DB"
+database_name = "nataliewinters-db"
+database_id = "67d2b960-fbe6-4451-b837-f88de68d2036"
 
 # Production Pages configuration (link via deploy command)
 [env.production.site]
