@@ -53,11 +53,17 @@ This project requires the following Cloudflare resources configured in `wrangler
 
 ## Deployment Workflow
 
+**🚨 CRITICAL WARNING 🚨**
+
+**NEVER deploy directly to the PRODUCTION Pages project (`natalie-winters-prod-this`) from your local machine using a simple `npx wrangler pages deploy ...` command.** This bypasses the standard Git workflow and can easily push unfinished or broken code from your development branch (`develop`) to the live website.
+
+**ALWAYS follow the Production Deployment steps below, which involve merging tested code from `develop` into the `production` branch FIRST, and then deploying the `production` branch.**
+
 **Important:** Ensure you have installed Node.js, npm, and the Wrangler CLI (`npm install -g wrangler`). Run `npm install` in the project root to install local dependencies.
 
-### 1. Development Deployment (to `test.nataliegwinters.com`)
+### 1. Development Deployment (to `natalie-g-winters-dev-this.pages.dev`)
 
-This deploys the latest code from your **current local branch** (usually `develop`) to the development Pages site.
+This deploys the latest code from your **current local branch** (usually `develop`) to the development Pages site. Use this frequently for testing.
 
 ```bash
 # Ensure you are on the correct branch (e.g., develop)
