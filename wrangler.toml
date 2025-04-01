@@ -15,4 +15,4 @@ database_id = "67d2b960-fbe6-4451-b837-f88de68d2036"
 [[env.development.d1_databases]]
 binding = "NATALIEWINTERS_DB"
 database_name = "nataliewinters-db-dev"
-database_id = "4e7cda13-39dd-430c-8c1c-29858789ddec"
+database_id = "ad356616-d8f8-4bf8-8d41-63daf8601fab"
