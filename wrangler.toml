@@ -3,6 +3,7 @@ name = "business-directory" # Worker name - keep consistent for now
 main = "worker.js"
 compatibility_date = "2023-03-29"
 workers_dev = true # Ensure workers.dev subdomain is enabled
+pages_build_output_dir = "public" # Specify the directory of static files to upload
 
 # Removed unused KV Namespaces
 # [[kv_namespaces]]
