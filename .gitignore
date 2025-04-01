@@ -10,17 +10,6 @@ yarn-error.log*
 *.db
 *.sqlite
 *.sqlite-journal
-.dev.vars # VERY IMPORTANT for local secrets - contains sensitive credentials
-.dev.vars.example # Template file for environment variables
-
-# CJ Feed Files (Temporary)
-cj-feed-download.zip
-cj-feed-extracted/
-
-# Large Generated Files
-d1-import-products.json
-sql-imports/
-temp_output/
 
 # OS generated files
 .DS_Store
@@ -28,10 +17,6 @@ Thumbs.db
 
 # Logs
 *.log
-import_log.txt # From PROJECT_STATUS_AND_PLAN.md
-
-# Temporary SQL files from import script
-# insert-*-batch-*.sql # Covered by sql-imports/
 
 # IDE specific
 .vscode/
@@ -40,10 +25,6 @@ import_log.txt # From PROJECT_STATUS_AND_PLAN.md
 # Build artifacts (if applicable)
 dist/
 build/
-
-# Custom Project Folders
-deleted/
-project_backup/
 
 # Documentation
 # README.md # Commit this
