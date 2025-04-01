@@ -231,6 +231,7 @@ main {
 
 /* Footer Banner Styling */
 .footer-banner {
+    width: 100%; /* Ensure container spans full width */
     text-align: center; /* Center the banner content */
     margin-top: var(--space-md); /* Add space above the banner */
     padding-bottom: var(--space-md); /* Add some padding below */
