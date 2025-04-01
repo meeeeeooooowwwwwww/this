@@ -10,9 +10,9 @@ binding = "NATALIEWINTERS_DB"
 database_name = "nataliewinters-db"
 database_id = "67d2b960-fbe6-4451-b837-f88de68d2036"
 
-# Development Environment Configuration
-[env.development]
-[[env.development.d1_databases]]
+# Preview Environment Configuration (for non-production branches)
+[env.preview]
+[[env.preview.d1_databases]]
 binding = "NATALIEWINTERS_DB"
 database_name = "nataliewinters-db-dev"
 database_id = "ad356616-d8f8-4bf8-8d41-63daf8601fab"
