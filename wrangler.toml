@@ -10,10 +10,6 @@ database_id = "67d2b960-fbe6-4451-b837-f88de68d2036"
 
 # Production Environment Configuration
 [env.production]
-routes = [
-    { pattern = "nataliegwinters.com/*", custom_domain = true }
-]
-
 [[env.production.d1_databases]]
 binding = "NATALIEWINTERS_DB"
 database_name = "nataliewinters-db"
