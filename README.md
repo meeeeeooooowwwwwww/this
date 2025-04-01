@@ -2,7 +2,7 @@
 
 This repository contains the source code for the Natalie G Winters website, deployed on Cloudflare Pages and powered by a Cloudflare Worker API connected to a Cloudflare D1 database.
 
-## Current Status (As of 2025-04-01 20:45)
+## Current Status (As of 2025-04-01 21:45)
 
 *   **CJ Product Feed:** The *first real* product feed (`AllAdvertisersDailyHTTP-shopping-*.zip`) is reported to be available on the CJ SFTP server (`datatransfer.cj.com:/outgoing/productcatalog`).
 *   **`scripts/transform-cj-products.js`:** This script has been **reverted** from using the local sample feed (`cj-sample-feed.txt`) and is now configured to connect via SFTP, download the latest ZIP, extract the feed, parse it, and output `d1-import-products.json` to the project root.
