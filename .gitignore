@@ -10,7 +10,8 @@ yarn-error.log*
 *.db
 *.sqlite
 *.sqlite-journal
-.dev.vars # VERY IMPORTANT for local secrets
+.dev.vars # VERY IMPORTANT for local secrets - contains sensitive credentials
+.dev.vars.example # Template file for environment variables
 
 # CJ Feed Files (Temporary)
 cj-feed-download.zip
