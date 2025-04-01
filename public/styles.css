@@ -229,6 +229,20 @@ main {
     margin-left: auto; /* Push to right when space allows */
 }
 
+/* Footer Banner Styling */
+.footer-banner {
+    text-align: center; /* Center the banner content */
+    margin-top: var(--space-md); /* Add space above the banner */
+    padding-bottom: var(--space-md); /* Add some padding below */
+    line-height: 0; /* Prevent extra space */
+}
+
+.footer-banner img {
+    display: inline-block; /* Allow text-align center to work */
+    max-width: 100%;
+    /* height: auto; Rely on img attribute */
+}
+
 /* --- Layout Variations --- */
 
 /* Default/Shared Structure */
