@@ -2,20 +2,11 @@
 
 This repository contains the source code for the Natalie G Winters website, deployed on Cloudflare Pages and powered by a Cloudflare Worker API connected to a Cloudflare D1 database.
 
-## Current Status (As of 2025-04-01 21:45)
-
-*   **CJ Product Feed:** The *first real* product feed (`AllAdvertisersDailyHTTP-shopping-*.zip`) is reported to be available on the CJ SFTP server (`datatransfer.cj.com:/outgoing/productcatalog`).
-*   **`scripts/transform-cj-products.js`:** This script has been **reverted** from using the local sample feed (`cj-sample-feed.txt`) and is now configured to connect via SFTP, download the latest ZIP, extract the feed, parse it, and output `d1-import-products.json` to the project root.
-*   **`scripts/import-to-d1.js`:** This script remains **temporarily modified** to ONLY process the `products` table. It will drop and recreate the `products` table using `sql_scripts/create-products.sql` and then attempt to import data from `d1-import-products.json`. The logic for importing articles and businesses is still commented out.
-*   **Next Steps:** The next intended action is to run `node scripts/transform-cj-products.js` locally to process the live feed, followed by `node scripts/import-to-d1.js` to update the remote D1 database's `products` table.
-
 ## Project Structure
 
 ```
 ./
 ├── public/               # Static frontend assets (HTML, CSS, JS, Images)
-├── scripts/              # Node.js scripts for data transformation, import, etc.
-├── sql_scripts/          # SQL schema and query files for D1
 ├── worker.js             # Cloudflare Worker API script
 ├── worker.live.backup.js # Backup of previously deployed worker
 ├── wrangler.toml         # Cloudflare configuration (Workers, Pages, D1, KV)
@@ -27,6 +18,10 @@ This repository contains the source code for the Natalie G Winters website, depl
 ├── deleted/              # Temporarily moved files during cleanup
 └── README.md             # This file
 ```
+
+## Data Management
+
+**Important:** All data transformation, import, and update processes (including product feeds, articles, etc.) are now handled in a separate private repository named `updates`. This repository (`this`) only contains the frontend code, the Cloudflare Worker API, and the necessary configuration for deployment. It consumes the data prepared by the `updates` repository via the D1 database.
 
 ## Technology Stack
 
@@ -48,26 +43,26 @@ This project requires the following Cloudflare resources configured in `wrangler
 
 ## Git Branching Strategy
 
-*   `develop`: Main branch for ongoing development and testing.
-*   `production`: Stable branch reflecting the code deployed to the live site (`nataliegwinters.com`). Changes are merged from `develop` only when ready for release.
+*   `development`: Main branch for ongoing development and testing.
+*   `production`: Stable branch reflecting the code deployed to the live site (`nataliegwinters.com`). Changes are merged from `development` only when ready for release.
 
 ## Deployment Workflow
 
 **🚨 CRITICAL WARNING 🚨**
 
-**NEVER deploy directly to the PRODUCTION Pages project (`natalie-winters-prod-this`) from your local machine using a simple `npx wrangler pages deploy ...` command.** This bypasses the standard Git workflow and can easily push unfinished or broken code from your development branch (`develop`) to the live website.
+**NEVER deploy directly to the PRODUCTION Pages project (`natalie-winters-prod-this`) from your local machine using a simple `npx wrangler pages deploy ...` command.** This bypasses the standard Git workflow and can easily push unfinished or broken code from your development branch (`development`) to the live website.
 
-**ALWAYS follow the Production Deployment steps below, which involve merging tested code from `develop` into the `production` branch FIRST, and then deploying the `production` branch.**
+**ALWAYS follow the Production Deployment steps below, which involve merging tested code from `development` into the `production` branch FIRST, and then deploying the `production` branch.**
 
 **Important:** Ensure you have installed Node.js, npm, and the Wrangler CLI (`npm install -g wrangler`). Run `npm install` in the project root to install local dependencies.
 
 ### 1. Development Deployment (to `natalie-g-winters-dev-this.pages.dev`)
 
-This deploys the latest code from your **current local branch** (usually `develop`) to the development Pages site. Use this frequently for testing.
+This deploys the latest code from your **current local branch** (usually `development`) to the development Pages site. Use this frequently for testing.
 
 ```bash
-# Ensure you are on the correct branch (e.g., develop)
-# git checkout develop
+# Ensure you are on the correct branch (e.g., development)
+# git checkout development
 
 # Deploy Worker (only if worker.js has changed)
 # npx wrangler deploy
@@ -81,9 +76,9 @@ npx wrangler pages deploy public --project-name=natalie-g-winters-dev-this
 **Only deploy when changes are tested and ready for the live site.**
 
 ```bash
-# 1. Ensure your local 'develop' branch is up-to-date
-git checkout develop
-git pull origin develop # Or your remote name
+# 1. Ensure your local 'development' branch is up-to-date
+git checkout development
+git pull origin development # Or your remote name
 
 # 2. Switch to the production branch
 git checkout production
@@ -91,8 +86,8 @@ git checkout production
 # 3. Pull the latest production code (if collaborating)
 # git pull origin production
 
-# 4. Merge tested changes from 'develop' into 'production'
-git merge develop
+# 4. Merge tested changes from 'development' into 'production'
+git merge development
 # --- Resolve any merge conflicts if they occur --- #
 
 # 5. Push the merge to the remote production branch (optional but good practice)
@@ -118,4 +113,18 @@ Run the local development server:
 npx wrangler dev
 ```
 
-**Important:** `wrangler dev` uses a **local simulation** of D1 and KV by default. It does **not** connect to your remote database unless specifically configured to do so (advanced). Use remote testing (deployment to `test.nataliegwinters.com`) for accurate data interaction tests. 
+**Important:** `wrangler dev` uses a **local simulation** of D1 and KV by default. It does **not** connect to your remote database unless specifically configured to do so (advanced). Use remote testing (deployment to `test.nataliegwinters.com`) for accurate data interaction tests.
+
+## Recent Changes (April 2, 2025 Session)
+
+*   Updated README to reflect that data processing occurs in the separate `updates` repo.
+*   Created `data-processing/` directory (subsequently added to `.gitignore`).
+*   Created script `data-processing/generate-article-sql.js` to generate SQL inserts from JSON (ignored via `.gitignore`).
+*   Troubleshot Cloudflare authentication issues (switched from API token env var to OAuth/browser login).
+*   Attempted to import sample data into remote dev D1 DB using `wrangler d1 execute` (deferred).
+*   Added affiliate banner to footer.
+*   Adjusted logo font size for mobile viewports.
+*   Adjusted footer banner styling for layout consistency.
+*   Renamed `[env.development]` to `[env.preview]` in `wrangler.toml` for Cloudflare Pages compatibility.
+*   Resolved Git branch state issues after reverting `development` branch.
+*   Pushed final footer banner changes to `development` and `production` branches. 
