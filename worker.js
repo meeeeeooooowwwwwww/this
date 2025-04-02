@@ -310,6 +310,8 @@ async function getData(env, options = {}) {
           LIMIT ? OFFSET ?
         `;
         countQuery = `SELECT COUNT(*) as count FROM videos`;
+        console.log('[getData - Videos] SQL Query:', sqlQuery);
+        console.log('[getData - Videos] Limit:', limit, 'Offset:', offset);
         break;
       case 'articles':
         sqlQuery = `
