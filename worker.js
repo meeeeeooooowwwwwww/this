@@ -112,18 +112,17 @@ async function searchData(env, query, options = {}) {
       // For videos, use a simpler query
       const sqlQuery = `
         SELECT 
-          id, title, description, link, thumbnail, uploader, 'video' as type
+          id, title, link, thumbnail, platform, source_type, 'video' as type
         FROM videos 
         WHERE 
-          LOWER(title) LIKE ? OR 
-          LOWER(description) LIKE ?
+          LOWER(title) LIKE ?
         LIMIT ? OFFSET ?
       `;
       
       try {
         // Execute the query
         const videosData = await env.NATALIEWINTERS_DB.prepare(sqlQuery)
-          .bind(searchTerm, searchTerm, limit, offset)
+          .bind(searchTerm, limit, offset)
           .all();
         
         if (videosData.results) {
@@ -133,9 +132,9 @@ async function searchData(env, query, options = {}) {
         // Get total count for pagination
         const videoCountData = await env.NATALIEWINTERS_DB.prepare(`
           SELECT COUNT(*) as count FROM videos 
-          WHERE LOWER(title) LIKE ? OR LOWER(description) LIKE ?
+          WHERE LOWER(title) LIKE ?
         `)
-          .bind(searchTerm, searchTerm)
+          .bind(searchTerm)
           .first();
         
         total += videoCountData?.count || 0;
@@ -305,7 +304,7 @@ async function getData(env, options = {}) {
       case 'videos':
         sqlQuery = `
           SELECT 
-            id, title, description, link, thumbnail, uploader, 'video' as type
+            id, title, link, thumbnail, publish_date, relative_time, platform, source_type, 'video' as type
           FROM videos
           ORDER BY created_at DESC
           LIMIT ? OFFSET ?
