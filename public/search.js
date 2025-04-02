@@ -4,9 +4,7 @@
 
 // Configuration - Reverted to using absolute Base URL for separate worker
 const API_CONFIG = {
-  baseUrl: window.location.hostname === 'localhost' 
-    ? 'http://localhost:8787' // For wrangler dev
-    : 'https://business-directory.generalflynn17.workers.dev', // Target the deployed worker URL
+  baseUrl: '', // Use relative paths to target the API within the same origin
   endpoints: {
     search: '/api/search',
     data: '/api/data'
